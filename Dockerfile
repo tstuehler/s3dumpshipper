@@ -11,5 +11,5 @@ RUN mkdir /dumps; \
 	rm -r /var/cache/apt /var/lib/apt/lists/*
 
 VOLUME ["/dumps"]
-CMD ["/bin/sh", "-c", "mc config host add s3svc ${S3URL} ${S3ACCESS} ${S3SECRET} && inotifywait -m /dumps -e close_write | while read path action file; do mc cp \"$path$file\" \"s3svc/${S3BUCKET}/$file\"; done;"]
+CMD ["/bin/sh", "-c", "mc config host add s3svc ${S3URL} ${S3ACCESS} ${S3SECRET} && inotifywait -m /dumps -e close_write | while read path action file; do mc cp \"$path$file\" \"s3svc/${S3BUCKET}/`date +%Y%m%dT%H%M%S`_`hostname`_$file\"; rm -f \"$path$file\"; done;"]
 
