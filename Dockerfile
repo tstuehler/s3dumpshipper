@@ -1,7 +1,7 @@
 FROM alpine
 
 RUN mkdir /dumps; \
-	apk add --no-cache inotify-tools wget && \
+	apk add --no-cache inotify-tools ca-certificates wget && \
 	(cd /usr/local/bin; wget https://dl.min.io/client/mc/release/linux-amd64/mc; chmod +x mc); \
 	apk del wget
 
